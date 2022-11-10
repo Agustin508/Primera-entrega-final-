@@ -1,0 +1,16 @@
+  {"type": "module",
+  "name": "clase12",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
+},
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "express": "^4.18.2",
+    "normalizr": "^3.6.2",
+    "socket.io": "^4.5.3"
+  }
+}
