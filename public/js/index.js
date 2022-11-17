@@ -125,3 +125,29 @@ fetch('http://localhost:8080/api/productos-test', {
 })
 	.then((res) => res.json())
 	.then((res) => renderProducts(res));
+
+fetch('http://localhost:8080/username', {
+	method: 'GET',
+})
+	.then((res) => res.json())
+	.then(
+		(res) =>
+		(document.getElementById('usuario').innerHTML = `Bienvenido ${res}`)
+	);
+	
+const logout = () => {
+	fetch('http://localhost:8080/logout', {
+		method: 'GET',
+	})
+		.then((res) => res.json())
+		.then((res) => {
+			document.getElementById('usuario').innerHTML = `Hasta Luego ${res}`;
+			document.getElementById('mainContent').innerHTML = ``;
+		})
+		.then(() => {
+			setTimeout(() => {
+				location.reload();
+			}, 2000);
+		})
+		.catch((err) => location.reload());
+	};

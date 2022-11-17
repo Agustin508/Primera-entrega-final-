@@ -12,12 +12,17 @@
 		/>
     <title>DesafioMocks</title>
 </head>
-<body>
+<body style="margin:1rem;">
+    <nav style="display: flex; justify-content:center; margin-bottom: 5rem;">
+        <h1 id="usuario"></h1> 
+        <button onclick="logout()" type="submit" class="btn btn-primary mb-1">Cerrar Sesion</button>
+    </nav>
+    <main id="mainContent">
     <div class="container-lg">
         <h2>LISTA DE PRODUCTOS</h2>
         <div class="container-lg" id="productList"></div>
     </div>
-
+    
     <div class="container-lg">
         <h2 id="chatHeader">CHAT DE LA PAGINA</h2>
         <form onsubmit="return addMessage(this)">
@@ -103,6 +108,7 @@
             <button class="btn btn-primary" type="submit">Enviar</button>
         </form>
     </div>
+    </main>
     <!-- CDN para utilizar normalizr desde el FRONT -->
     <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js
     "></script>
