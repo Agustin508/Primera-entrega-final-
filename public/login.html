@@ -13,17 +13,30 @@
 		/>
 	</head>
 	<body>
-        <div class="container-lg">
-		<form method="post" action="/login">
-			<label for="usuario" style="display: flex; justify-content:center;font-size:50px;">login</label>
-			<input class="form-control"
-				type="text"
-				name="usuario"
-				placeholder="Escribe tu usuario aqui"
-				required
-			/>
-			<button type="submit" class="btn btn-primary mb-3">Conectarse</button>
-		</form>
-        </div>
-	</body>
+	<div class="container mt-5" id="divPrincipal">
+		<div>
+			<div>
+				<h2>Login Page</h2>
+				<br>
+				<p>Login or register from here to access.</p>
+			</div>
+		</div>
+		<div class="main">
+			<div class="col-md-6 col-sm-12">
+				<div>
+					<form action="/api/login" method="post" autocomplete="off">
+						<div class="form-group">
+							<label for="username">Email</label>
+							<input id="username"  type="text" name="username" required>
+							<label for="password">Password</label>
+							<input id="password"  type="password" name="password" required>
+						</div>
+						<button class="btn btn-black mt-3">Log In</button>
+						<a class="btn btn-secondary mt-3" href="/register.html">Register</a>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
