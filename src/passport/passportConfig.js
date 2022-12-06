@@ -6,15 +6,14 @@ const LocalStrategy = require("passport-local").Strategy
 
 const users = new usersMongoDB();
 
-//Sign-up
 passport.use("local-signup", new LocalStrategy({
     usernameField: "username",
     passwordField: "password",
     passReqToCallback: true
 }, async (req, username, password, done) => {
-    //Valido el user
+
     let user = await users.getByUser(username)
-    //Hasheo la password
+
     const hash = bcrypt.hashSync(password, saltRounds);
 
     if (user) {
@@ -28,9 +27,9 @@ passport.use("local-signup", new LocalStrategy({
     return done(null, userNew)
 }))
 
-//Sign in
+
 passport.use("local-login", new LocalStrategy(async (username, password, done) => {
-    //Validacion contra la base de datos
+
     let user = await users.getByUser(username);
 
     if (user) {
@@ -41,14 +40,14 @@ passport.use("local-login", new LocalStrategy(async (username, password, done) =
     return done(null, false)
 }))
 
-//Serializacion
+
 passport.serializeUser((user, done) => {
     done(null, user.id)
 })
 
-//Deserializacion
+
 passport.deserializeUser(async (id, done) => {
-    //Validacion contra la base de datos
+
     let user = await users.getById(id)
     done(null, user)
 })

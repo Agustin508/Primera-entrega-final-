@@ -6,7 +6,7 @@ const app = express();
 const {Router} = express;
 const router = new Router();
 
-//GET DEL LOGOUT
+
 router.get("/", (req, res,next) => {
     req.logout(function(err) {
         if (err) { return next(err); }
@@ -14,5 +14,4 @@ router.get("/", (req, res,next) => {
 });
 
 
-//EXPORT MODULO ROUTER
 module.exports = router;

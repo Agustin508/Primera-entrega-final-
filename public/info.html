@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="titulo">
+            Información del proyecto:
+        </h1>
+        <div class="table-responsive">
+            <table class="table table-dark" id="tabla">
+                <thead>
+                    <tr>
+                        <th>version</th>
+                        <th>argumentos</th>
+                        <th>pathExe</th>
+                        <th>plataforma</th>
+                        <th>memoria.rss</th>
+                        <th>processId</th>
+                        <th>carpeta</th>
+                    </tr>
+                </thead>
+                <tbody id="infooo">
+                </tbody>
+               
+            </table>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>

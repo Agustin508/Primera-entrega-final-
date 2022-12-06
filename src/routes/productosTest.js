@@ -8,9 +8,9 @@ const {
 const router = new Router();
 
 
-//GET
+
 router.get("/", (req, res) => {
-    //Genero array vacio, pusheo 5 productos con faker y lo envio
+
     let arrayPtos = [];
 
     for (let index = 0; index < 5; index++) {
@@ -24,5 +24,4 @@ router.get("/", (req, res) => {
     res.send(arrayPtos)
 });
 
-//EXPORT MODULO ROUTER
 module.exports = router;

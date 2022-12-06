@@ -7,7 +7,6 @@ const {
 } = express;
 const router = new Router();
 
-//GET DEL LOGIN
 router.get("/", (req, res) => {
     if (req.user) {
         res.send({
@@ -18,11 +17,9 @@ router.get("/", (req, res) => {
     }
 });
 
-//POST DEL LOGIN
 router.post("/", passportConfig.authenticate("local-login", {
     successRedirect: "/index.html",
     failureRedirect: "/loginError.html"
 }))
 
-//EXPORT MODULO ROUTER
 module.exports = router;

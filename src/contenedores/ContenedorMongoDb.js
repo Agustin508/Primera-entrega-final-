@@ -1,13 +1,16 @@
 const mongoose = require('mongoose')
-const config = require('../configDB')
+const dotenv = require('dotenv')
+dotenv.config();
+//const config = require('../configDB')
 
 const main = () => {
-    mongoose.connect(config.mongodb.conexionMongo)
-    mongoose.connection.on("open", () => {
-        console.log("Base de datos conectada con exito!!")
-    })
-    mongoose.connection.on("error", () => {
-        console.log("Error al conectarse a la base de datos!!")
+    mongoose.connect
+    (`mongodb+srv://${process.env.MG_USER}:${process.env.MG_PASS}@cluster0.izru1oz.mongodb.net/sessions`, {useNewUrlParser: true},
+    (err)=> {
+        console.log("Conectado!");
+        if (err) {
+            console.log(err)
+        }
     })
 }
 main();

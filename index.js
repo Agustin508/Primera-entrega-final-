@@ -2,16 +2,16 @@ const express = require("express");
 const path = require("path");
 const session = require('express-session')
 const passport = require("passport")
+const parseArgs = require("minimist")
 
-const app = express();
-const PORT = process.env.PORT || 8080;
+const app = express()
 
 //sessions
 app.use(session({
 	cookie: {
 		maxAge: 600000
 	},
-	secret: "dalerojo",
+	secret: "RioHondo",
 	resave: false,
 	saveUninitialized: false,
 	rolling: true
@@ -36,6 +36,10 @@ const logout = require("./src/routes/logout")
 app.use("/api/logout", logout)
 const register = require("./src/routes/register")
 app.use("/api/register", register)
+const info = require("./src/routes/info")
+app.use("/api/info", info)
+const randomNumRouter =require ("./src/routes/randomNumbers");
+app.use("/api/randoms", randomNumRouter)
 
 //Servidor HTTP
 const http = require("http");
@@ -54,10 +58,21 @@ io.on("connection", (socket) => {
 	})
 })
 
+//Minimist
+const options= {
+	alias: {
+	  p: "PORT",
+	},
+	default: {
+	  PORT: 8080,
+	}
+  }
+  
+  const argv = process.argv.slice(2);
+  const { PORT } = parseArgs(argv, options)
+  console.log({PORT})
 
-//Comienzo Servidor
-server.listen(PORT, () => {
+  server.listen(PORT, () => {
 	console.log(`Server is run on port ${server.address().port}`)
 })
 server.on('error', error => console.log(`Error en servidor ${error}`))
-
