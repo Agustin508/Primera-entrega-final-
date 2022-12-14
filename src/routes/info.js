@@ -1,5 +1,6 @@
 const Router = require ("express")
 const path = require("path");
+const {cpus} = require ("os");
 
 const router = new Router()
 
@@ -10,6 +11,7 @@ const memoria = process.memoryUsage();
 const pathExe = process.execPath;
 const processId = process.pid;
 const carpeta = process.cwd();
+const cpu = cpus().length;
 
 
 router.get("/", (req, res) => {
@@ -23,7 +25,8 @@ router.get("/", (req, res) => {
             memoria: memoria.rss,
             pathExe: pathExe,
             processId: processId,
-            carpeta: carpeta,})}
+            carpeta: carpeta,
+            cpu: cpu})}
 
             res.send(arrayInfo)
 

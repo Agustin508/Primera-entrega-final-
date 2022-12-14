@@ -120,6 +120,8 @@ function renderInfo() {
 			aux6.innerHTML = `$ ${infoooo.processId}`;
 			let aux7 = document.createElement('td');
 			aux7.innerHTML = `$ ${infoooo.carpeta}`;
+			let aux8 = document.createElement('td');
+			aux8.innerHTML = `$ ${infoooo.cpu}`;
 			fila.appendChild(aux1);
 			fila.appendChild(aux2);
 			fila.appendChild(aux3);
@@ -127,6 +129,7 @@ function renderInfo() {
 			fila.appendChild(aux5);
 			fila.appendChild(aux6);
 			fila.appendChild(aux7);
+			fila.appendChild(aux8);
 			infoo.appendChild(fila);
 		}
 		

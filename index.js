@@ -1,8 +1,12 @@
 const express = require("express");
 const path = require("path");
-const session = require('express-session')
-const passport = require("passport")
-const parseArgs = require("minimist")
+const session = require('express-session');
+const passport = require("passport");
+const parseArgs = require("minimist");
+const {fork} = require("child_process")
+const {cpus} = require ("os");
+const cluster = require ("cluster")
+
 
 const app = express()
 
@@ -46,9 +50,7 @@ const http = require("http");
 const server = http.createServer(app);
 
 //Servidor de Socket
-const {
-	Server
-} = require("socket.io");
+const {Server} = require("socket.io");
 const io = new Server(server);
 
 io.on("connection", (socket) => {
@@ -59,20 +61,48 @@ io.on("connection", (socket) => {
 })
 
 //Minimist
-const options= {
+
+
+  const options= {
 	alias: {
-	  p: "PORT",
+	  p: "port",
+	  m: "modo"
 	},
 	default: {
-	  PORT: 8080,
+	  port: 8080,
+	  modo: "fork"
 	}
   }
-  
-  const argv = process.argv.slice(2);
-  const { PORT } = parseArgs(argv, options)
-  console.log({PORT})
 
-  server.listen(PORT, () => {
-	console.log(`Server is run on port ${server.address().port}`)
-})
-server.on('error', error => console.log(`Error en servidor ${error}`))
+
+ //servidor 
+  const argv = process.argv.slice(2);
+  const { port, modo } = parseArgs(argv, options)
+  console.log({port, modo})
+
+  const cpu = cpus().length;
+  console.log({cpu})
+
+  if (modo == "cluster") {
+    if (cluster.isPrimary) {
+      console.log(`Primary ${process.pid} is running`);
+
+      // Fork workers.
+      for (let i = 0; i < 3; i++) {
+        cluster.fork();
+      }
+      cluster.on('exit', (worker, code, signal) => {
+        console.log(`worker ${worker.process.pid} died`);
+        //cluster.fork()
+      });
+    } else {
+      server.listen(port, () => {
+        console.log(`Servidor http escuchando en el puerto ${options.port}! en modo ${options.m} en el worker ${process.pid}`)
+      });
+    }
+  }
+  else {
+    server.listen(port, () => {
+      console.log(`Servidor http escuchando en el puerto ${options.port}! en modo ${options.m}`)
+    });
+  }
