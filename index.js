@@ -6,8 +6,7 @@ const parseArgs = require("minimist");
 const {fork} = require("child_process")
 const {cpus} = require ("os");
 const cluster = require ("cluster")
-
-
+const logger = require("./src/configLog4js");
 const app = express()
 
 //sessions
@@ -45,6 +44,19 @@ app.use("/api/info", info)
 const randomNumRouter =require ("./src/routes/randomNumbers");
 app.use("/api/randoms", randomNumRouter)
 
+//* Logger
+app.use((req, res, next) => {
+  logger.info(`Request ${req.method} at ${req.url}`)
+  next();
+});
+
+//* Logger para rutas inexistentes
+app.all("*", (req, res, next) => {
+  logger.warn(`Failed request ${req.method} at ${req.url}`);
+  res.send({ error:true }).status(500);
+  next();
+})
+
 //Servidor HTTP
 const http = require("http");
 const server = http.createServer(app);
@@ -69,7 +81,7 @@ io.on("connection", (socket) => {
 	  m: "modo"
 	},
 	default: {
-	  port: 8080,
+	  port: 8085,
 	  modo: "fork"
 	}
   }

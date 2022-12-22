@@ -2,9 +2,7 @@ const express = require("express");
 const faker = require("faker")
 
 const app = express();
-const {
-    Router
-} = express;
+const {Router} = express;
 const router = new Router();
 
 

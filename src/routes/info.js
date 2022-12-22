@@ -1,6 +1,7 @@
 const Router = require ("express")
 const path = require("path");
 const {cpus} = require ("os");
+//const compression = require("compression")
 
 const router = new Router()
 
@@ -13,6 +14,8 @@ const processId = process.pid;
 const carpeta = process.cwd();
 const cpu = cpus().length;
 
+//sin compression 430B
+//con compression 432B
 
 router.get("/", (req, res) => {
     let arrayInfo = [];
@@ -29,7 +32,7 @@ router.get("/", (req, res) => {
             cpu: cpu})}
 
             res.send(arrayInfo)
-
+            console.log(arrayInfo)
 });
 
 module.exports = router;
