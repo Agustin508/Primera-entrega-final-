@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const session = require('cookie-session');
+const session = require('express-session');
 const passport = require("passport");
 const parseArgs = require("minimist");
 const {fork} = require("child_process")
@@ -88,7 +88,7 @@ io.on("connection", (socket) => {
  //servidor 
   const argv = process.argv.slice(2);
   const {  modo } = parseArgs(argv, options)
-  const port = process.env.PORT || 8080
+  const port = process.env.PORT || 8081
   console.log({port, modo})
 
   const cpu = cpus().length;
