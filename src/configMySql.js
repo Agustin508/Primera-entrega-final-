@@ -2,7 +2,7 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 const db_client = process.env.DB_CLIENT_SQL || "mysql2"
-const db_host = process.env.DB_HOST_SQL || "containers-us-west-127.railway.app"
+const db_host = process.env.DB_HOST_SQL || "localhost"
 const db_port = Number(process.env.DB_PORT_SQL) || 7116
 const db_user = process.env.DB_USER_SQL || "root"
 const db_name = process.env.DB_NAME_SQL || "bd_productos"
