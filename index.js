@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const session = require('express-session');
+const session = require('cookie-session');
 const passport = require("passport");
 const parseArgs = require("minimist");
 const {fork} = require("child_process")
