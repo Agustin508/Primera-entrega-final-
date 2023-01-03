@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const session = require('cookie-session');
+const session = require('express-session');
 const passport = require("passport");
 const parseArgs = require("minimist");
 const {fork} = require("child_process")
@@ -77,11 +77,9 @@ io.on("connection", (socket) => {
 
   const options= {
 	alias: {
-	  p: "port",
 	  m: "modo"
 	},
 	default: {
-	  port: 8085,
 	  modo: "fork"
 	}
   }
@@ -89,7 +87,8 @@ io.on("connection", (socket) => {
 
  //servidor 
   const argv = process.argv.slice(2);
-  const { port, modo } = parseArgs(argv, options)
+  const {  modo } = parseArgs(argv, options)
+  const port = process.env.PORT || 8080
   console.log({port, modo})
 
   const cpu = cpus().length;
